@@ -38,7 +38,7 @@ To address this challenge, it is useful to create an ecosystem around GNSS corre
 
 ## DISCLAIMER
   
-This set of guidelines consist of a several practical examplse to help Septentrio Module users and developers to integrate third party GNSS corrections. The guidelines are based on a concrete setup, which you may or may not use to follow the integration guidelines.
+This set of guidelines consist of a several practical examples to help Septentrio Module users and developers to integrate third party GNSS corrections. The guidelines are based on a concrete setup, which you may or may not use to follow the integration guidelines.
 
 It is desirable to mention the disclaimer about that setup and the guides in general before starting reading this guide.
   
@@ -52,14 +52,17 @@ It is desirable to mention the disclaimer about that setup and the guides in gen
 <!--ts-->
 
 * [Introduction](#introduction)
-* [Who is Swift Navigation?](#who-is-Swift-navigation)
+* [Who is Swift Navigation?](#who-is-swift-navigation)
 * [What is Skylark?](#what-is-skylark)
+* [Known current limitations](#known-current-limitations-with-skylark-when-used-with-septentrio-receivers)
 * [Is the project Open Source?](#is-the-project-open-source)
-* [Receiver and Raspberry Pi Setup](#receiver-and-raspberry-pi-setup)
-* [str2str tool and RTKLIB installation](#str2str-tool-and-rtklib-installation)
-    * [What are RTKLIB and str2str?](#what-are-rtklib-and-str2str)
-    * [Tool installation](#tool-installation)
-* [Running Skylark service and str2str tool](#running-skylark-service-and-str2str-tool)
+* [Option 1: Using Skylark with NTRIP on board the receiver](#option-1-using-skylark-with-ntrip-on-board-the-receiver)
+* [Option 2: Using Skylark with NTRIP client running in a Raspberry Pi](#option-2-using-skylark-with-ntrip-client-running-in-a-raspberry-pi)
+   * [Receiver and Raspberry Pi Setup](#receiver-and-raspberry-pi-setup)
+   * [str2str tool and RTKLIB installation](#str2str-tool-and-rtklib-installation)
+      * [What are RTKLIB and str2str?](#what-are-rtklib-and-str2str)
+      * [Tool installation](#tool-installation)
+   * [Running Skylark service and str2str tool](#running-skylark-service-and-str2str-tool)
 
 <!--te-->
 
@@ -117,13 +120,37 @@ To know more about the service you can visit the following official web pages:
           
 </div>
 
-## IS THE PROJECT OPEN SOURCE?
+## Known current limitations with Skylark when used with Septentrio receivers
+**Note**
+:information_source: Although Swiftnav Skylark correction stream contains 3 constellations: Galileo, GPS and BeiDou; Septentrions Receivers only accepts fully RTCM standard compliant data, therefore GPS and Galileo are the only constellations currently used. To be highlighted as well is that the RTK Fix rate of Septentrio receivers, when using Skylark corrections, increases significantly if only GPS corrections are used, this is due to the correction quality difference for the different constellations.
 
+## IS THE PROJECT OPEN SOURCE?
 This implementation guide for the Skylark correction services offered by Swift Navigation is open-source. That is, this repository does not contain any code created or modified by us, but is a guide to using the RTKLIB library or other techniques such as sharing the internet via USB cable from the Rapsberry Pi to the Septentrio receiver. Therefore, this guide could be modified thanks to the feedback of the users who use it, so you are welcome to leave us your opinion or suggestions for improvement.
 
-## RECEIVER AND RASPBERRY PI SETUP
+## Option 1: Using Skylark with NTRIP on board the receiver
+SwiftNav works over NTRIP. Luckily all Septentrio receivers support NTRIP and have an NTRIP client embedded in the GNSS receiver. This can be accessed via the web-user interface.
 
-The implementation of this service is based and tested on a specific setup. This setup consists of two main elements and their wiring and peripherals. These elements are the Mosaic-Go Module evaluation kit and a Raspberry Pi 4 Model B. 
+A guide on how to use NTRIP in Septentrio receivers can be found here:
+
+<div align="center">
+    
+| <a href="https://customersupport.septentrio.com/s/article/How-to-receive-corrections-via-NTRIP"> Click here to see how to use NTRIP with Septentrio receivers.</a> |
+|---|
+    
+</div>
+
+The section below however make a setup of NTRIP using a Raspberry Pi setup which when together with the mosaic-go might alternatively use an NTRIP client running in the Raspberry Pi.
+
+## Option 2: Using Skylark with NTRIP client running in a Raspberry Pi
+This method can be handy in the following circumstances:
+-When the user cannot share internet access from the processor to the mosaic-go in order to use NTRIP
+-When the user prefers to use a standard Serial port from the receiver 
+
+The instructions below try to mimic a customer CPU using in this case a Raspberry Pi.
+
+### RECEIVER AND RASPBERRY PI SETUP
+
+Besides using the NTRIP client embedded in the receiver, the implementation of this service is based and tested on a specific setup. This setup consists of two main elements and their wiring and peripherals. These elements are the Mosaic-Go Module evaluation kit and a Raspberry Pi 4 Model B. 
 
 <div align="center">
     
@@ -134,11 +161,11 @@ The implementation of this service is based and tested on a specific setup. This
 
 It is necessary to follow the instructions of the previous setup installation guide, to return to this point for the implementation of the Swift Navigation's Skylark corrections service.
 
-## STR2STR TOOL AND RTKLIB INSTALLATION
+### STR2STR TOOL AND RTKLIB INSTALLATION
 
 Once the setup described above has been installed, the next step is to install a RTKLIB's tool called str2str, to be able to receive corrections from Skylark NTRIP Server/Caster to send them to the receiver and for to receive NMEA:GGA Messages from the receiver to send them to Skylark NTRIP Server/Caster.
 
-### What are RTKLIB and str2str?
+#### What are RTKLIB and str2str?
 
 **RTKLIB:**
 
@@ -150,7 +177,7 @@ Once the setup described above has been installed, the next step is to install a
 
 This repository provides a solution for a specific case where the input stream is a corrections provider that uses NTRIP. In this case, you should have the information (host, stream, password, etc.) of the NTRIP connection of the Correction Service Provider.
 
-### TOOL INSTALLATION
+#### TOOL INSTALLATION
 
 For the installation of the str2str tool, please following the next guide:
 
@@ -163,7 +190,7 @@ For the installation of the str2str tool, please following the next guide:
 
 Once the installation of the str2str tool has been made, there is only one last step is missing, which is the execution of the tool with your NTRIP credentials and serial port configuration. This steps are show in <a href="https://github.com/septentrio-gnss/SwiftCorrectionsWithSeptentrio#running-skylark-service-and-str2str-tool">next section</a>.
 
-## Running Skylark service and str2str tool
+### Running Skylark service and str2str tool
 
 Once the Receiver and Raspberry Pi setup and RTKLIB's str2str tool installation are done, the only step remaining is to execute the str2str tool as showed in the previous mentioned guide. Also, here is a generic example of the usage of str2str having NTRIP as an input source and Serial port as an output.
 
