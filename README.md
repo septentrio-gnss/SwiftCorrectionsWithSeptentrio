@@ -38,7 +38,7 @@ To address this challenge, it is useful to create an ecosystem around GNSS corre
 
 ## DISCLAIMER
   
-This set of guidelines consist of a several practical examplse to help Septentrio Module users and developers to integrate third party GNSS corrections. The guidelines are based on a concrete setup, which you may or may not use to follow the integration guidelines.
+This set of guidelines consist of a several practical examples to help Septentrio Module users and developers to integrate third party GNSS corrections. The guidelines are based on a concrete setup, which you may or may not use to follow the integration guidelines.
 
 It is desirable to mention the disclaimer about that setup and the guides in general before starting reading this guide.
   
