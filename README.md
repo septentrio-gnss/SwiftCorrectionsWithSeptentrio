@@ -128,13 +128,31 @@ To know more about the service you can visit the following official web pages:
 This implementation guide for the Skylark correction services offered by Swift Navigation is open-source. That is, this repository does not contain any code created or modified by us, but is a guide to using the RTKLIB library or other techniques such as sharing the internet via USB cable from the Rapsberry Pi to the Septentrio receiver. Therefore, this guide could be modified thanks to the feedback of the users who use it, so you are welcome to leave us your opinion or suggestions for improvement.
 
 ## Option 1: Using Skylark with NTRIP on board the receiver
-SwiftNav works over NTRIP. Luckily all Septentrio receivers support NTRIP and have an NTRIP client embedded in the GNSS receiver. This can be accessed via the web-user interface.
+SwiftNav works over NTRIP. Luckily all Septentrio receivers support NTRIP and have an NTRIP client embedded in the GNSS receiver. This can be accessed via the web-user interface. 
 
 A guide on how to use NTRIP in Septentrio receivers can be found here:
 
 <div align="center">
     
 | <a href="https://customersupport.septentrio.com/s/article/How-to-receive-corrections-via-NTRIP"> Click here to see how to use NTRIP with Septentrio receivers.</a> |
+|---|
+    
+</div>
+
+The mosaic receiver will need access to internet access in order to work properly. 
+If connected to a PC you can enable internet access using the following guide:
+
+<div align="center">
+    
+| <a href="https://customersupport.septentrio.com/s/article/Internet-Over-USB"> Click here to see how share internet access from your PC to the receiver.</a> |
+|---|
+    
+</div>
+
+If connected to a Raspberry Pi, then you can share internet access using the following guide:
+<div align="center">
+    
+| <a href="https://github.com/septentrio-gnss/Septentrio_AgnosticCorrectionsProgram#rtklib-str2str-tool-compilation-and-use-guide"> Click here to see how share internet access from your PC to the receiver.</a> |
 |---|
     
 </div>
