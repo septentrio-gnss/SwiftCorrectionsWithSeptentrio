@@ -149,14 +149,6 @@ If connected to a PC you can enable internet access using the following guide:
     
 </div>
 
-If connected to a Raspberry Pi, then you can share internet access using the following guide:
-<div align="center">
-    
-| <a href="https://github.com/septentrio-gnss/Septentrio_AgnosticCorrectionsProgram#rtklib-str2str-tool-compilation-and-use-guide"> Click here to see how share internet access from your PC to the receiver.</a> |
-|---|
-    
-</div>
-
 The section below however make a setup of NTRIP using a Raspberry Pi setup which when together with the mosaic-go might alternatively use an NTRIP client running in the Raspberry Pi.
 
 ## Option 2: Using Skylark with NTRIP client running in a Raspberry Pi
