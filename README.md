@@ -122,7 +122,7 @@ To know more about the service you can visit the following official web pages:
 
 ## Known current limitations with Skylark when used with Septentrio receivers
 **Note**
-:information_source: Although Swiftnav Skylark correction stream contains 3 constellations: Galileo, GPS and BeiDou; Septentrions Receivers are not compatibleyet with the BaiDou correction data from Swiftnav, therefore GPS and Galileo are the only constellations currently used. To be highlighted as well is that the RTK Fix rate of Septentrio receivers, when using Skylark corrections, increases significantly if only GPS corrections are used, this is due to the correction quality difference for the different constellations.
+:information_source: Although Swiftnav Skylark correction stream contains 3 constellations: Galileo, GPS and BeiDou; Septentrio Receivers are not compatible with the BeiDou correction data from Swiftnav, therefore GPS and Galileo are the only constellations currently used. To be highlighted as well is that the RTK Fix rate of Septentrio receivers, when using Skylark corrections, increases significantly if only GPS corrections are used, this is due to the correction quality difference for the different constellations.
 
 ## IS THE PROJECT OPEN SOURCE?
 This implementation guide for the Skylark correction services offered by Swift Navigation is open-source. That is, this repository does not contain any code created or modified by us, but is a guide to using the RTKLIB library or other techniques such as sharing the internet via USB cable from the Rapsberry Pi to the Septentrio receiver. Therefore, this guide could be modified thanks to the feedback of the users who use it, so you are welcome to leave us your opinion or suggestions for improvement.
